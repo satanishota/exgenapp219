@@ -14,7 +14,76 @@
     <label for ="msg">Message</label>
     <input type="text" name="message" id="msg">
     <input type="submit" value="送信">
-  </div>
   </form>
+  </div>
+  <div>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d26830.609516406454!2d130.70611595941222!3d32.79686760664992!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e2!4m5!1s0x3540f40e023aca59%3A0x5e8b66c876cde430!2z54aK5pys5Z-O44CB44CSODYwLTAwMDIg54aK5pys55yM54aK5pys5biC5Lit5aSu5Yy65pys5Li477yR4oiS77yR!3m2!1d32.806185899999996!2d130.70583349999998!4m5!1s0x3540f334762e110f%3A0x6c9a1d77de586743!2z44CSODYyLTA5NTAg54aK5pys55yM54aK5pys5biC5Lit5aSu5Yy65rC05YmN5a-677yW5LiB55uu77yR77yY4oiS77yRIOODq-ODleOCo-WDjw!3m2!1d32.789010999999995!2d130.74130309999998!5e0!3m2!1sja!2sjp!4v1663714440822!5m2!1sja!2sjp"
+     width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+
+    <html>
+<head>
+<meta charset="utf-8">
+<title>Simple Map Sample</title>
+<meta charset="utf-8">
+<style>
+/* マップを表示する div 要素の高さを必ず明示的に指定します。 */
+#map {
+  height: 400px;
+  width: 600px;
+}
+</style>
+</head>
+  
+<body>
+<div id="map"></div><!-- 地図を表示する div 要素（id="map"）-->
+<script>
+  
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: -34.397, lng: 150.644},
+      zoom: 8
+    });
+  }
+</script> 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDltvu2rAxtmbb4hSZjjnJJIsy1DRCzDtw&callback=initMap" async defer></script>
 </body>
 </html>
+  </div>
+  
+</body>
+</html>
+ 
+<script>
+
+function initMap() {
+	var latlng = new google.maps.LatLng(35.6843218, 139.70311200000003); //中心の緯度, 経度
+	var map = new google.maps.Map(document.getElementById('maps'), {
+		zoom: 17,
+		center: latlng
+	});
+
+	var yoyogi = new google.maps.LatLng(35.683049, 139.702055);
+	var directionsService = new google.maps.DirectionsService();
+	var directionsRenderer = new google.maps.DirectionsRenderer();
+
+	var request = {
+		origin: yoyogi, //スタート地点
+		destination: latlng, //ゴール地点
+		waypoints: [ //経由地点
+			{location: new google.maps.LatLng(35.683021,139.702668), stopover: false}
+		],
+		travelMode: google.maps.DirectionsTravelMode.WALKING, //移動手段
+	};
+
+	directionsService.route(request, function(result, status) {
+		if (status == google.maps.DirectionsStatus.OK) {
+			directionsRenderer.setOptions({
+				preserveViewport: true //ズーム率を変更してルート全体を表示しない
+			});
+			// ルート検索の結果を地図上に描画
+			directionsRenderer.setDirections(result);
+			directionsRenderer.setMap(map);
+		}
+	});
+}
+</script>

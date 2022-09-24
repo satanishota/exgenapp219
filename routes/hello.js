@@ -14,6 +14,13 @@ router.get('/',(req, res, next) => {
   res.render('hello', data);
 });
 
+router.get('/2',(req, res, next) => {
+  var data = {
+    title:'hello2',
+  };
+  res.render('hello2', data);
+});
+
 router.post('/post',(req,res,next) => {
   var msg =req.body['message'];
   req.session.message = msg;
